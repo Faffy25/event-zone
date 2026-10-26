@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register</title>
+  <style>
+     body {
+      font-family: Poppins, sans-serif;
+      background: #F2D6CE;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('/event-zone/Event-Management/projectImages/background.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: -1;
+      opacity: 0.2;
+    }
+    .form-container {
+      display: flex;
+      width: 350px;
+      gap: 40px;
+      flex-direction: column;
+    }
+    .form {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    .form h2 {
+      margin-bottom: 20px;
+      color: black;
+      text-align: center;
+      font-size: xx-large;
+    }
+    .form label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+    .form input {
+      width: 90%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 3px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    .form input:invalid {
+      border-color: #CA8E82;
+    }
+    .dropbtn {
+      background-color: #F2D6CE;
+      color: black;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+    }
+    .dropbtn:hover, .dropbtn:focus {
+      background-color: #CA8E82;
+    }
+    .dropdown {
+      position: relative;
+      display: block;
+      width: 100%;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f1f1f1;
+      min-width: 100%;
+      box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+      z-index: 1;
+      max-height: 150px;
+      overflow-y: auto;
+    }
+    .dropdown-content a {
+      color: black;
+      padding: 10px;
+      text-decoration: none;
+      display: block;
+    }
+    .dropdown-content a:hover {
+      background-color: #ddd;
+    }
+    .show {
+      display: block;
+    }
+    .form .btn {
+      width: 100%;
+      background-color: #CA8E82;
+      color: white;
+      border: none;
+      padding: 15px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .form .btn:hover {
+      background-color: #F2D6CE;
+    }
+    .form p {
+      text-align: center;
+      font-size: 14px;
+    }
+    .form a {
+      color: #bc958a;
+      text-decoration: none;
+    }
+    .form a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <form action="/event-zone/Event-Management/Organizer/register.php" method="POST" class="form" id="signupForm">
+      <h2>Register</h2>
+      
+      <label for="firstname">First Name</label>
+      <input type="text" id="firstname" name="firstname" required minlength="3" placeholder="Enter First Name">
+      
+      <label for="lastname">Last Name</label>
+      <input type="text" id="lastname" name="lastname" required minlength="3" placeholder="Enter Last Name">
+      
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required placeholder="Enter email">
+      
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required minlength="6" placeholder="Enter password">
+      
+      <label for="mobile">Mobile Number</label>
+      <input type="phone" id="mobile" name="mobile" required minlength="6" placeholder="Enter Mobile Number">
+      
+      <label>Register As</label>
+      <div class="dropdown">
+        <button onclick="myFunction(event)" class="dropbtn">Select Role</button>
+        <div id="myDropdown" class="dropdown-content">
+          <a href="#" onclick="selectRole(event, 1)">Goer</a> 
+          <a href="#" onclick="selectRole(event, 2)">Organizer</a>
+          <a href="#" onclick="selectRole(event, 3)">Admin</a> 
+        </div>
+        <input type="hidden" name="role_id" id="selectedRole">
+      </div>
+
+      <br>
+      <button type="submit" class="btn">Sign Up</button>
+      <p>Already have an account? <a href="/event-zone/Event-Management/Organizer/login.html">Login here</a></p>
+    </form>
+  </div>
+
+  <script>
+    function myFunction(event) {
+      event.preventDefault();
+      document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+    function selectRole(event, roleId) {
+      event.preventDefault();
+      document.getElementById("selectedRole").value = roleId;
+      document.querySelector(".dropbtn").innerText = event.target.innerText;
+      document.getElementById("myDropdown").classList.remove("show");
+    }
+
+    window.onclick = function(event) {
+      if (!event.target.matches('.dropbtn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        for (var i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        }
+      }
+    }
+  </script>
+</body>
+</html>
